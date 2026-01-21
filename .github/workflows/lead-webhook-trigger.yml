@@ -1,0 +1,63 @@
+name: Lead Webhook Trigger
+
+on:
+  workflow_dispatch:
+    inputs:
+      full_name:
+        description: 'Nom complet du lead'
+        required: true
+        type: string
+      email:
+        description: 'Email du lead'
+        required: true
+        type: string
+      phone:
+        description: 'Téléphone du lead'
+        required: true
+        type: string
+      company:
+        description: 'Entreprise du lead'
+        required: false
+        type: string
+      business_sector:
+        description: 'Secteur d\'activité'
+        required: false
+        type: string
+      needs:
+        description: 'Besoins exprimés'
+        required: false
+        type: string
+
+jobs:
+  process-lead:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Process lead data
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_EMAIL: ${{ secrets.SMTP_EMAIL }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        run: |
+          python scripts/process_lead.py \
+            --full-name "${{ github.event.inputs.full_name }}" \
+            --email "${{ github.event.inputs.email }}" \
+            --phone "${{ github.event.inputs.phone }}" \
+            --company "${{ github.event.inputs.company }}" \
+            --business-sector "${{ github.event.inputs.business_sector }}" \
+            --needs "${{ github.event.inputs.needs }}"
