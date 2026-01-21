@@ -4,7 +4,11 @@
 
 ## ✅ État du projet
 
-Le système d'automatisation de capture de leads est **entièrement configuré** et prêt à fonctionner.
+Le système d'automatisation de capture de leads est **configuré à 90%**. Consultez [ETAPES_RESTANTES.md](ETAPES_RESTANTES.md) pour terminer la configuration.
+
+**Secrets GitHub restants à configurer** (2 actions manuelles requises):
+- `GOOGLE_SERVICE_ACCOUNT_JSON`: Contenu du fichier JSON téléchargé
+- `SMTP_PASSWORD`: Mot de passe d'application Gmail (16 caractères)
 
 ### Ce qui a été fait :
 
