@@ -1,0 +1,19 @@
+{
+  "email_delay_hours": 48,
+  "daily_report_time": "18:00",
+  "email_check_time": "09:00",
+  "email_subject": "Audit Automatisation - Résultats et recommandations",
+  "slack_report_enabled": true,
+  "lead_fields": [
+    "Date réception",
+    "Nom complet",
+    "Email",
+    "Téléphone",
+    "Entreprise",
+    "Secteur d'activité",
+    "Besoins",
+    "Statut",
+    "Date envoi email programmé",
+    "Email envoyé"
+  ]
+}
